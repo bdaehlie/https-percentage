@@ -1,2 +1,3 @@
-1) Add reset button to popup
-2) Persist data across restarts
+* Get idle state detection working
+* Add reset button to popup
+* Publish to AMO

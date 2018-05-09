@@ -7,8 +7,10 @@
   "description": "Displays the percentage of network connections that use HTTPS while you browse the Web.",
 
   "permissions": [
+    "<all_urls>",
     "webRequest",
-    "<all_urls>"
+    "idle",
+    "storage"
   ],
 
   "icons": {
@@ -22,7 +24,8 @@
   "browser_action": {
     "default_icon": "icons/https-percentage-32.png",
     "default_title": "HTTPS Percentage",
-    "default_popup": "popup/popup.html"
+    "default_popup": "popup/popup.html",
+    "browser_style": true
   }
 
 }

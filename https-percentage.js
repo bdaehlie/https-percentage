@@ -1,8 +1,3 @@
-// TODO
-// 1) Don't update UI more than once per second
-// 2) Display percentage in URL bar
-// 3) Persist data across restarts
-
 var totalRequests = 0;
 var httpsRequests = 0;
 

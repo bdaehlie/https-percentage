@@ -8,7 +8,7 @@ function updateHTTPSPercentage(percentage) {
   var newdiv = document.createElement('div');
   newdiv.class = "stat";
   newdiv.id = "https-percentage";
-  newdiv.innerHTML = string;
+  newdiv.textContent = string;
 
   document.body.replaceChild(newdiv, olddiv);
 }

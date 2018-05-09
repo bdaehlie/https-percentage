@@ -1,5 +1,16 @@
+// GLOBAL DATA
+
 var totalRequests = 0;
 var httpsRequests = 0;
+
+// UTILITY FUNCTIONS
+
+function calculateHTTPSPercentage() {
+  if (totalRequests == 0) {
+    return 0;
+  }
+  return ((httpsRequests / totalRequests) * 100).toFixed(0);
+}
 
 function logPercentageToConsole() {
   console.log(calculateHTTPSPercentage().toString() + "% HTTPS!");
@@ -8,6 +19,8 @@ function logPercentageToConsole() {
 function saveData() {
   browser.storage.local.set({totalRequests: totalRequests, httpsRequests: httpsRequests});
 }
+
+// RESTORE DATA
 
 function readSavedData(result) {
   if (result.totalRequests && result.httpsRequests) {
@@ -24,20 +37,14 @@ function onDataReadError(error) {
 var savedDataGetting = browser.storage.local.get();
 savedDataGetting.then(readSavedData, onDataReadError);
 
-// This idle event detection doesn't appear to work!
+// [BROKEN] IDLE STATE DETECTION AND DATA SAVE
+
 function newIdleState(state) {
   if (state == "idle") {
     saveData();
   }
 }
 browser.idle.onStateChanged.addListener(newIdleState);
-
-function calculateHTTPSPercentage() {
-  if (totalRequests == 0) {
-    return 0;
-  }
-  return ((httpsRequests / totalRequests) * 100).toFixed(0);
-}
 
 browser.runtime.onConnect.addListener(function(port) {
   if(port.name == "getHTTPSPercentage") {
@@ -46,22 +53,20 @@ browser.runtime.onConnect.addListener(function(port) {
   }
 });
 
+// HTTPS STAT COLLECTION
+
 function onHTTPRequest(e) {
   totalRequests++;
-  // logPercentageToConsole();
 }
-
-function onHTTPSRequest(e) {
-  totalRequests++;
-  httpsRequests++;
-  // logPercentageToConsole();
-}
-
 browser.webRequest.onHeadersReceived.addListener(
   onHTTPRequest,
   {urls: ["http://*/*"]}
 );
 
+function onHTTPSRequest(e) {
+  totalRequests++;
+  httpsRequests++;
+}
 browser.webRequest.onHeadersReceived.addListener(
   onHTTPSRequest,
   {urls: ["https://*/*"]}

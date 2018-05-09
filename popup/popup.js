@@ -1,5 +1,6 @@
-var port = browser.runtime.connect({name: "getHTTPSPercentage"});
+// GET AND DISPLAY HTTPS PERCENTAGE
 
+var port = browser.runtime.connect({name: "getHTTPSPercentage"});
 port.onMessage.addListener(function(msg) {
   document.getElementById("https-percentage").innerHTML = msg.httpsPercentage.toString() + "% HTTPS";
 });

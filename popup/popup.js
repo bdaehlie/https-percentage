@@ -3,14 +3,8 @@
 // Takes an integer percentage value.
 function updateHTTPSPercentage(percentage) {
   var string = percentage.toString() + "% HTTPS";
-  var olddiv = document.getElementById("https-percentage");
-
-  var newdiv = document.createElement('div');
-  newdiv.class = "stat";
-  newdiv.id = "https-percentage";
-  newdiv.textContent = string;
-
-  document.body.replaceChild(newdiv, olddiv);
+  var element = document.getElementById("https-percentage");
+  element.textContent = string;
 }
 
 // MESSAGE HANDLING

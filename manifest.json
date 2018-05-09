@@ -1,0 +1,22 @@
+{
+
+  "manifest_version": 2,
+  "name": "HTTPS Percentage",
+  "version": "1.0",
+
+  "description": "Displays the percentage of network connections that use HTTPS while you browse the Web.",
+
+  "permissions": [
+    "webRequest",
+    "<all_urls>"
+  ],
+
+  "icons": {
+    "48": "icons/https-percentage-48.png"
+  },
+
+  "background": {
+    "scripts": ["https-percentage.js"]
+  }
+
+}

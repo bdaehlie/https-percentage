@@ -6,6 +6,13 @@
 
   "description": "Displays the percentage of network connections that use HTTPS while you browse the Web.",
 
+  "applications": {
+    "gecko": {
+      "id": "https-percentage@kflag.net",
+      "strict_min_version": "59.0"
+    }
+  },
+
   "permissions": [
     "<all_urls>",
     "webRequest",

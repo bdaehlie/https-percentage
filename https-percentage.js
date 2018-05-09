@@ -37,13 +37,14 @@ function onDataReadError(error) {
 var savedDataGetting = browser.storage.local.get();
 savedDataGetting.then(readSavedData, onDataReadError);
 
-// [BROKEN] IDLE STATE DETECTION AND DATA SAVE
+// IDLE STATE DETECTION AND DATA SAVE
 
 function newIdleState(state) {
   if (state == "idle") {
     saveData();
   }
 }
+browser.idle.setDetectionInterval(15);
 browser.idle.onStateChanged.addListener(newIdleState);
 
 // MESSAGE PASSING

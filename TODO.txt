@@ -1,3 +1,2 @@
-* Get idle state detection working
 * Add reset button to popup
 * Publish to AMO

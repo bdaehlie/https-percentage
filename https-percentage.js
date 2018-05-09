@@ -46,10 +46,12 @@ function newIdleState(state) {
 }
 browser.idle.onStateChanged.addListener(newIdleState);
 
+// MESSAGE PASSING
+
 browser.runtime.onConnect.addListener(function(port) {
   if(port.name == "getHTTPSPercentage") {
     port.postMessage({httpsPercentage: calculateHTTPSPercentage()});
-    saveData(); // This can go away when idle detection works!
+    saveData(); // Save data whenever user looks at it
   }
 });
 

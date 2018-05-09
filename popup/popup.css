@@ -7,6 +7,10 @@ button {
 	margin: 5px;
 }
 
+.buttons {
+	text-align: center;
+}
+
 .stat {
     text-align: center;
     padding-top: 5px;

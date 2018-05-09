@@ -31,8 +31,7 @@
   "browser_action": {
     "default_icon": "icons/https-percentage-32.png",
     "default_title": "HTTPS Percentage",
-    "default_popup": "popup/popup.html",
-    "browser_style": true
+    "default_popup": "popup/popup.html"
   }
 
 }

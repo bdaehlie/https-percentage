@@ -47,14 +47,27 @@ function newIdleState(state) {
 browser.idle.setDetectionInterval(15);
 browser.idle.onStateChanged.addListener(newIdleState);
 
-// MESSAGE PASSING
+// MESSAGE HANDLING
 
-browser.runtime.onConnect.addListener(function(port) {
-  if(port.name == "getHTTPSPercentage") {
-    port.postMessage({httpsPercentage: calculateHTTPSPercentage()});
+var messagePort = null;
+
+function onMessage(msg) {
+  if(msg.id == "getHTTPSPercentage") {
+    messagePort.postMessage({id: "httpsPercentage", value: calculateHTTPSPercentage()});
     saveData(); // Save data whenever user looks at it
   }
-});
+  else if (msg.id == "resetHTTPSPercentage") {
+    totalRequests = 0;
+    httpsRequests = 0;
+    saveData();
+  }
+}
+
+function onPortConnect(port) {
+  messagePort = port;
+  messagePort.onMessage.addListener(onMessage);
+}
+browser.runtime.onConnect.addListener(onPortConnect);
 
 // HTTPS STAT COLLECTION
 

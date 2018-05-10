@@ -1,5 +1,5 @@
 html, body {
-  width: 250px;
+  width: 280px;
 }
 
 button {
@@ -12,6 +12,7 @@ button {
 }
 
 .stat {
+  font-size: 110%;
   text-align: center;
   padding-top: 3px;
   padding-bottom: 3px;
@@ -19,7 +20,7 @@ button {
 }
 
 .context {
-  font-size: 60%;
+  font-size: 75%;
   text-align: center;
   padding-top: 3px;
   padding-bottom: 3px;
@@ -27,5 +28,5 @@ button {
 }
 
 #conn-count, #https-percentage, #since-date {
-	display:inline;
+  display:inline;
 }

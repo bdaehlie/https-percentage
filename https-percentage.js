@@ -56,7 +56,7 @@ function onMessage(msg) {
   if(msg.id == "getHTTPSPercentage") {
     messagePort.postMessage({id: "httpsPercentage",
                      percentage: calculateHTTPSPercentage(),
-                     conn_count: totalRequests,
+                      req_count: totalRequests,
                            date: sinceDate});
     saveData(); // Save data whenever user looks at it
   }

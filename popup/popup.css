@@ -27,6 +27,6 @@ button {
   color: black;
 }
 
-#conn-count, #https-percentage, #since-date {
+#req-count, #https-percentage, #since-date {
   display:inline;
 }

@@ -1,14 +1,14 @@
 // UTILITY FUNCTIONS
 
-// Takes an integer percentage value, integer conn_count, Date object
-function updateHTTPSPercentage(percentage, conn_count, date) {
+// Takes an integer percentage value, integer req_count, Date object
+function updateHTTPSPercentage(percentage, req_count, date) {
   var percentageStr = percentage.toString();
   var element = document.getElementById("https-percentage");
   element.textContent = percentageStr;
 
-  var connCountStr = conn_count.toLocaleString();
-  element = document.getElementById("conn-count");
-  element.textContent = connCountStr;
+  var reqCountStr = req_count.toLocaleString();
+  element = document.getElementById("req-count");
+  element.textContent = reqCountStr;
 
   var dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
   var timeOptions = { hour12: false, hour: 'numeric', minute: 'numeric', timeZoneName: 'short' };
@@ -24,7 +24,7 @@ function updateHTTPSPercentage(percentage, conn_count, date) {
 var messagePort = browser.runtime.connect({name: "HTTPSPercentage"});
 function onMessage(msg) {
   if (msg.id == "httpsPercentage") {
-    updateHTTPSPercentage(msg.percentage, msg.conn_count, msg.date);
+    updateHTTPSPercentage(msg.percentage, msg.req_count, msg.date);
   }
 }
 messagePort.onMessage.addListener(onMessage);

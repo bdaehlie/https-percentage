@@ -1,19 +1,31 @@
 html, body {
-  width: 110px;
+  width: 250px;
 }
 
 button {
-	text-align: center;
-	margin: 5px;
+  text-align: center;
+  margin: 5px;
 }
 
 .buttons {
-	text-align: center;
+  text-align: center;
 }
 
 .stat {
-    text-align: center;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    color: black;
+  text-align: center;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  color: black;
+}
+
+.context {
+  font-size: 60%;
+  text-align: center;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  color: black;
+}
+
+#conn-count, #https-percentage, #since-date {
+	display:inline;
 }

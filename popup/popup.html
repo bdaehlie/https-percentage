@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 
 <html>
-  <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="popup.css"/>
-  </head>
+
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="popup.css"/>
+</head>
 
 <body>
-  <div class="stat" id="https-percentage">0% HTTPS</div>
+  <div class="stat">HTTPS: <div id="https-percentage">0</div>%</div>
+  <div class="context">of <div id="conn-count">0</div> connections</div>
+  <div class="context">since <div id="since-date">N/A</div></div>
   <div class="buttons">
     <button type="button" id="reset-button">Reset</button>
   </div>

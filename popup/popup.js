@@ -6,14 +6,14 @@ function updateHTTPSPercentage(percentage, conn_count, date) {
   var element = document.getElementById("https-percentage");
   element.textContent = percentageStr;
 
-  var connCountStr = conn_count.toString();
+  var connCountStr = conn_count.toLocaleString();
   element = document.getElementById("conn-count");
   element.textContent = connCountStr;
 
   var dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
   var timeOptions = { hour12: false, hour: 'numeric', minute: 'numeric', timeZoneName: 'short' };
   var dateStr = date.toLocaleDateString('en-us', dateOptions) +
-                " at " +
+                ", " +
                 date.toLocaleTimeString('en-us', timeOptions);
   element = document.getElementById("since-date");
   element.textContent = dateStr;
@@ -24,7 +24,7 @@ function updateHTTPSPercentage(percentage, conn_count, date) {
 var messagePort = browser.runtime.connect({name: "HTTPSPercentage"});
 function onMessage(msg) {
   if (msg.id == "httpsPercentage") {
-    updateHTTPSPercentage(msg.value, 65, new Date());
+    updateHTTPSPercentage(msg.percentage, msg.conn_count, msg.date);
   }
 }
 messagePort.onMessage.addListener(onMessage);
@@ -37,6 +37,6 @@ messagePort.postMessage({id: "getHTTPSPercentage", value: null});
 
 function handleResetClick() {
   messagePort.postMessage({id: "resetHTTPSPercentage", value: null});
-  updateHTTPSPercentage(0);
+  updateHTTPSPercentage(0, 0, new Date());
 }
 document.getElementById("reset-button").onclick = handleResetClick;

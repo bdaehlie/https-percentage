@@ -16,10 +16,6 @@ function calculateHTTPSPercentage() {
   return ((httpsRequests / totalRequests) * 100).toFixed(0);
 }
 
-function logPercentageToConsole() {
-  console.log(calculateHTTPSPercentage().toString() + "% HTTPS!");
-}
-
 function saveData() {
   browser.storage.local.set({totalRequests: totalRequests,
                              httpsRequests: httpsRequests,
@@ -60,7 +56,8 @@ function onMessage(msg) {
     messagePort.postMessage({id: "httpsPercentage",
                      percentage: calculateHTTPSPercentage(),
                       req_count: totalRequests,
-                           date: sinceDate});
+                           date: sinceDate,
+                 topVulnDomains: ["pbskids.org", "espn.com"]});
     saveData(); // Save data whenever user looks at it
 
     // For now print this out to console. Eventually we will

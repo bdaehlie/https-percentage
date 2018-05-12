@@ -1,7 +1,7 @@
 // UTILITY FUNCTIONS
 
 // Takes an integer percentage value, integer req_count, Date object
-function updateHTTPSPercentage(percentage, req_count, date) {
+function updateHTTPSPercentage(percentage, req_count, date, topVulnDomains) {
   var percentageStr = percentage.toString();
   var element = document.getElementById("https-percentage");
   element.textContent = percentageStr;
@@ -17,6 +17,13 @@ function updateHTTPSPercentage(percentage, req_count, date) {
                 date.toLocaleTimeString('en-us', timeOptions);
   element = document.getElementById("since-date");
   element.textContent = dateStr;
+
+  element = document.getElementById("vuln-domains-list");
+  for (var i = 0; i < topVulnDomains.length; i++) {
+    var domain = topVulnDomains[i];
+    element.appendChild(document.createTextNode(domain));
+    element.appendChild(document.createElement("br"));
+  }
 }
 
 // MESSAGE HANDLING
@@ -24,7 +31,7 @@ function updateHTTPSPercentage(percentage, req_count, date) {
 var messagePort = browser.runtime.connect({name: "HTTPSPercentage"});
 function onMessage(msg) {
   if (msg.id == "httpsPercentage") {
-    updateHTTPSPercentage(msg.percentage, msg.req_count, msg.date);
+    updateHTTPSPercentage(msg.percentage, msg.req_count, msg.date, msg.topVulnDomains);
   }
 }
 messagePort.onMessage.addListener(onMessage);

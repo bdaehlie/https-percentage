@@ -19,10 +19,14 @@ function updateHTTPSPercentage(percentage, req_count, date, topVulnDomains) {
   element.textContent = dateStr;
 
   element = document.getElementById("vuln-domains-list");
-  for (var i = 0; i < topVulnDomains.length; i++) {
-    var domain = topVulnDomains[i];
-    element.appendChild(document.createTextNode(domain));
-    element.appendChild(document.createElement("br"));
+  if (topVulnDomains.length == 0) {
+    element.appendChild(document.createTextNode("None yet!"));
+  } else {
+    for (var i = 0; i < topVulnDomains.length; i++) {
+      var domain = topVulnDomains[i];
+      element.appendChild(document.createTextNode(domain));
+      element.appendChild(document.createElement("br"));
+    }
   }
 }
 

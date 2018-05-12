@@ -5,7 +5,7 @@ var httpsRequests = 0;
 var sinceDate = new Date();
 
 var httpDomainCountMap = new Map();
-var topHTTPDomains = new Object();
+var topVulnDomains = [];
 
 // UTILITY FUNCTIONS
 
@@ -57,14 +57,8 @@ function onMessage(msg) {
                      percentage: calculateHTTPSPercentage(),
                       req_count: totalRequests,
                            date: sinceDate,
-                 topVulnDomains: ["pbskids.org", "espn.com"]});
+                 topVulnDomains: topVulnDomains});
     saveData(); // Save data whenever user looks at it
-
-    // For now print this out to console. Eventually we will
-    // return this to the popup and display there.
-    for (d in topHTTPDomains) {
-      console.log("Top HTTP domain: " + d);
-    }
   }
   else if (msg.id == "resetHTTPSPercentage") {
     totalRequests = 0;
@@ -92,27 +86,36 @@ function updateHTTPDomainCount(domain) {
     httpDomainCountMap.set(domain, 1);
   }
 
+  // Don't do anything else if domain is already in top list.
+  for (var i = 1; i < topVulnDomains.length; i++) {
+    if (domain == topVulnDomains[i]) {
+      return;
+    }
+  }
+
   // If fewer than 10 top domains just add to list.
-  if (Object.keys(topHTTPDomains).length < 10) {
-    topHTTPDomains[domain] = count;
+  if (topVulnDomains.length < 10) {
+    topVulnDomains.push(domain);
     return;
   }
 
   // Find lowest count in top domains.
-  var topDomains = Object.keys(topHTTPDomains);
-  var lowestTopDomain = topDomains[0];
-  var lowestTopDomainCount = topHTTPDomains[lowestTopDomain];
-  for (d in topDomains) {
-    if (topHTTPDomains[d] < lowestTopDomainCount) {
-      lowestTopDomain = d;
-      lowestTopDomainCount = topHTTPDomains[d];
+  var lowestTopDomainIndex = 0;
+  var lowestTopDomain = topVulnDomains[lowestTopDomainIndex];
+  var lowestTopDomainCount = httpDomainCountMap[lowestTopDomain];
+  for (var i = 1; i < topVulnDomains.length; i++) {
+    currentDomain = topVulnDomains[i];
+    currentDomainCount = httpDomainCountMap[currentDomain];
+    if (currentDomainCount < lowestTopDomainCount) {
+      lowestTopDomainIndex = i;
+      lowestTopDomain = currentDomain;
+      lowestTopDomainCount = currentDomainCount;
     }
   }
 
-  // If new top domain replace the old one.
+  // If new top domain replace the old one...
   if (count > lowestTopDomainCount) {
-    delete topHTTPDomains[lowestTopDomain];
-    topHTTPDomains[domain] = count;
+    topVulnDomains[lowestTopDomainIndex] = domain;
   }
 }
 

@@ -2,7 +2,7 @@
 
   "manifest_version": 2,
   "name": "HTTPS Percentage",
-  "version": "1.1",
+  "version": "2.0",
 
   "description": "Displays the percentage of network requests that use HTTPS while you browse the Web.",
 

@@ -1,6 +1,3 @@
-// UTILITY FUNCTIONS
-
-// Takes an integer percentage value, integer req_count, Date object
 function updateHTTPSPercentage(percentage, req_count, date, topVulnDomains) {
   var percentageStr = percentage.toString();
   var element = document.getElementById("https-percentage");
@@ -30,8 +27,6 @@ function updateHTTPSPercentage(percentage, req_count, date, topVulnDomains) {
   }
 }
 
-// MESSAGE HANDLING
-
 var messagePort = browser.runtime.connect({name: "HTTPSPercentage"});
 function onMessage(msg) {
   if (msg.id == "httpsPercentage") {
@@ -39,12 +34,7 @@ function onMessage(msg) {
   }
 }
 messagePort.onMessage.addListener(onMessage);
-
-// GET HTTPS PERCENTAGE
-
 messagePort.postMessage({id: "getHTTPSPercentage", value: null});
-
-// RESET BUTTON
 
 function handleResetClick() {
   messagePort.postMessage({id: "resetHTTPSPercentage", value: null});

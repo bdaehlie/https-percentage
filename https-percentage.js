@@ -64,6 +64,8 @@ function onMessage(msg) {
     totalRequests = 0;
     httpsRequests = 0;
     sinceDate = new Date();
+    httpDomainCountMap = new Map();
+    topVulnDomains = [];
     saveData();
   }
 }

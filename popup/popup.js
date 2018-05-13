@@ -16,6 +16,9 @@ function updateHTTPSPercentage(percentage, req_count, date, topVulnDomains) {
   element.textContent = dateStr;
 
   element = document.getElementById("vuln-domains-list");
+  while (element.firstChild) {
+    element.removeChild(element.firstChild);
+  }
   if (topVulnDomains.length == 0) {
     element.appendChild(document.createTextNode("None yet!"));
   } else {
@@ -38,6 +41,6 @@ messagePort.postMessage({id: "getHTTPSPercentage", value: null});
 
 function handleResetClick() {
   messagePort.postMessage({id: "resetHTTPSPercentage", value: null});
-  updateHTTPSPercentage(0, 0, new Date());
+  updateHTTPSPercentage(0, 0, new Date(), []);
 }
 document.getElementById("reset-button").onclick = handleResetClick;

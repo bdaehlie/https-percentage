@@ -26,7 +26,10 @@
   },
 
   "background": {
-    "scripts": ["https-percentage.js"]
+    "scripts": [
+      "browser-polyfill.js",
+      "https-percentage.js"
+    ]
   },
 
   "browser_action": {

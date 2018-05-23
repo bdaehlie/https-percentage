@@ -19,7 +19,7 @@ function calculateHTTPSPercentage() {
 function saveData() {
   browser.storage.local.set({totalRequests: totalRequests,
                              httpsRequests: httpsRequests,
-                                 sinceDate: sinceDate});
+                                 sinceDate: sinceDate.getTime()});
 }
 
 // RESTORE DATA
@@ -56,7 +56,7 @@ function onMessage(msg) {
     messagePort.postMessage({id: "httpsPercentage",
                      percentage: calculateHTTPSPercentage(),
                       req_count: totalRequests,
-                           date: sinceDate,
+                           date: sinceDate.getTime(),
                  topVulnDomains: topVulnDomains});
     saveData(); // Save data whenever user looks at it
   }

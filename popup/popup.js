@@ -33,7 +33,8 @@ function updateHTTPSPercentage(percentage, req_count, date, topVulnDomains) {
 var messagePort = browser.runtime.connect({name: "HTTPSPercentage"});
 function onMessage(msg) {
   if (msg.id == "httpsPercentage") {
-    updateHTTPSPercentage(msg.percentage, msg.req_count, msg.date, msg.topVulnDomains);
+    date = new Date(msg.date);
+    updateHTTPSPercentage(msg.percentage, msg.req_count, date, msg.topVulnDomains);
   }
 }
 messagePort.onMessage.addListener(onMessage);

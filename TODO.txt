@@ -1,2 +1,1 @@
 * Better icon, add 96 size
-* Display top 10 plain HTTP domains per browsing session (no persist)
